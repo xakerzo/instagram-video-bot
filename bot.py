@@ -1,4 +1,4 @@
-import os
+[import os
 import instaloader
 import requests
 import tempfile
@@ -72,4 +72,4 @@ def main():
     app.run_polling()
 
 if __name__ == "__main__":
-    main()
+    main()]
