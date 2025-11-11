@@ -2,33 +2,32 @@ import os
 import instaloader
 import requests
 import tempfile
-import time
 from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, ContextTypes, filters
 
-# PORT ni olamiz (Render uchun)
-port = int(os.environ.get('PORT', 8080))
-print(f"📍 Port: {port}")
+print("🚀 Bot Railway da ishga tushmoqda...")
 
-# Sozlamalar
-BOT_TOKEN = os.environ['BOT_TOKEN8294906702:AAHkYE73B6m5NokLedyUBsUTXib4XdLQ2BE']
+# Environment variables
+BOT_TOKEN = os.environ['8294906702:AAHkYE73B6m5NokLedyUBsUTXib4XdLQ2BE']
 INSTAGRAM_USERNAME = os.environ.get('instadanvideoyukla, '')
 INSTAGRAM_PASSWORD = os.environ.get('Namangan0700', '')
 
-print("🚀 Bot ishga tushmoqda...")
-
-# Instaloader (login siz - bloklanmaslik uchun)
+# Instaloader
 L = instaloader.Instaloader(download_videos=False)
-print("ℹ️ Login siz ishlaydi")
+
+# Instagram login
+if INSTAGRAM_USERNAME and INSTAGRAM_PASSWORD:
+    try:
+        L.login(INSTAGRAM_USERNAME, INSTAGRAM_PASSWORD)
+        print("✅ Instagramga login qilindi")
+    except Exception as e:
+        print(f"⚠️ Login xatosi: {e}")
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("👋 Instagram video bot! Link yuboring.")
 
 async def handle_video(update: Update, context: ContextTypes.DEFAULT_TYPE):
     url = update.message.text.strip()
-    
-    if url == '/start':
-        return await start(update, context)
     
     if "instagram.com" not in url:
         await update.message.reply_text("❌ Instagram link yuboring.")
@@ -44,8 +43,6 @@ async def handle_video(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             await update.message.reply_text("❌ Noto'g'ri link.")
             return
-        
-        print(f"📥 Yuklanayotgan: {shortcode}")
         
         post = instaloader.Post.from_shortcode(L.context, shortcode)
         
