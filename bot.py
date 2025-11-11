@@ -1,4 +1,4 @@
-[import os
+import os
 import instaloader
 import requests
 import tempfile
@@ -7,15 +7,12 @@ from telegram.ext import ApplicationBuilder, MessageHandler, ContextTypes, filte
 
 print("🚀 Bot Railway da ishga tushmoqda...")
 
-# Environment variables
-BOT_TOKEN = os.environ['8294906702:AAHkYE73B6m5NokLedyUBsUTXib4XdLQ2BE']
+BOT_TOKEN = os.environ['BOT_TOKEN8294906702:AAHkYE73B6m5NokLedyUBsUTXib4XdLQ2BE']
 INSTAGRAM_USERNAME = os.environ.get('instadanvideoyukla, '')
 INSTAGRAM_PASSWORD = os.environ.get('Namangan0700', '')
 
-# Instaloader
 L = instaloader.Instaloader(download_videos=False)
 
-# Instagram login
 if INSTAGRAM_USERNAME and INSTAGRAM_PASSWORD:
     try:
         L.login(INSTAGRAM_USERNAME, INSTAGRAM_PASSWORD)
@@ -72,4 +69,4 @@ def main():
     app.run_polling()
 
 if __name__ == "__main__":
-    main()]
+    main()
