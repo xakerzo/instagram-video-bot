@@ -6,7 +6,7 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, MessageHandler, ContextTypes, filters
 
 # 🔑 BU YERGA O'Z MA'LUMOTLARINGIZNI QO'YING
-BOT_TOKEN = "YOUR_BOT_TOKEN_HERE8294906702:AAHkYE73B6m5NokLedyUBsUTXib4XdLQ2BE"  # ⚠️ O'Z TOKENINGIZNI QO'YING
+BOT_TOKEN = "8294906702:AAHkYE73B6m5NokLedyUBsUTXib4XdLQ2BE"  # ⚠️ O'Z TOKENINGIZNI QO'YING
 INSTAGRAM_USERNAME = "instadanvideoyukla"  # ⚠️ O'Z LOGININGIZNI QO'YING
 INSTAGRAM_PASSWORD = "Namangan0700"  # ⚠️ O'Z PAROLINGIZNI QO'YING
 
