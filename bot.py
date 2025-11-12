@@ -12,9 +12,9 @@ from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, Con
 from dotenv import load_dotenv
 
 # ---- Load environment ----
-load_dotenv()
+load_dotenv()  # .env faylni o‘qiydi
 BOT_TOKEN = os.getenv("8294906702:AAHkYE73B6m5NokLedyUBsUTXib4XdLQ2BE")
-ADMIN_CHAT_ID = os.getenv("1373647")  # optional, alertlar uchun
+ADMIN_CHAT_ID = os.getenv("1373647")  # alertlar uchun (optional)
 INSTAGRAM_USERNAME = os.getenv("instadanvideoyukla")
 INSTAGRAM_PASSWORD = os.getenv("Namangan0700", "")
 SESSION_FILE = os.getenv("SESSION_FILE", "insta_session")
@@ -35,7 +35,7 @@ def insta_login():
     """Login with session fallback."""
     try:
         if Path(SESSION_FILE).exists():
-            logger.info(f"Loading session from {SESSION_FILE}")
+            logger.info(f"Loading Instagram session from {SESSION_FILE}")
             L.load_session_from_file(INSTAGRAM_USERNAME, SESSION_FILE)
             logger.info("Session loaded successfully.")
         elif INSTAGRAM_PASSWORD:
