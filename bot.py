@@ -9,16 +9,17 @@ import logging
 from pathlib import Path
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
-from dotenv import load_dotenv
 
-# ---- Load environment ----
-load_dotenv()  # .env faylni o‘qiydi
-BOT_TOKEN = os.getenv("8294906702:AAHkYE73B6m5NokLedyUBsUTXib4XdLQ2BE")
-ADMIN_CHAT_ID = os.getenv("1373647")  # alertlar uchun (optional)
-INSTAGRAM_USERNAME = os.getenv("instadanvideoyukla")
-INSTAGRAM_PASSWORD = os.getenv("Namangan0700", "")
-SESSION_FILE = os.getenv("SESSION_FILE", "insta_session")
-MAX_SEND_BYTES = int(os.getenv("MAX_SEND_BYTES", str(48*1024*1024)))
+# ---- Environment variables ----
+BOT_TOKEN = os.environ.get("8294906702:AAHkYE73B6m5NokLedyUBsUTXib4XdLQ2BE")
+ADMIN_CHAT_ID = os.environ.get("1373647")  # optional
+INSTAGRAM_USERNAME = os.environ.get("instadanvideoyukla1")
+INSTAGRAM_PASSWORD = os.environ.get("Namangan0700", "")
+SESSION_FILE = os.environ.get("SESSION_FILE", "insta_session")
+MAX_SEND_BYTES = int(os.environ.get("MAX_SEND_BYTES", str(48*1024*1024)))
+
+if not BOT_TOKEN or not INSTAGRAM_USERNAME:
+    raise SystemExit("🚨 BOT_TOKEN va INSTAGRAM_USERNAME environment variables set qilinmagan!")
 
 # ---- Logging ----
 logging.basicConfig(level=logging.INFO)
@@ -129,7 +130,7 @@ async def handle_instagram_link(update: Update, context: ContextTypes.DEFAULT_TY
             with open(video_path, "rb") as video_file:
                 await update.message.reply_video(
                     video=video_file,
-                    caption=post.caption[:500] + f"\n\n📥 @instadan_video_yuklabot",
+                    caption=(post.caption[:500] if post.caption else "Instagram video") + f"\n\n📥 @instadan_video_yuklabot",
                     supports_streaming=True
                 )
         os.unlink(video_path)
