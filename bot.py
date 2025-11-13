@@ -4,11 +4,12 @@ from aiogram import Bot, Dispatcher, types
 from aiogram.filters import CommandStart
 from aiogram.types import Message
 from config import BOT_TOKEN
+import asyncio
 
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
-# Instagram video yuklab olish uchun funksiya
+# Instagram video yuklab olish funksiyasi
 def download_instagram_video(url):
     try:
         api_url = f"https://api.sssgram.io/media?url={url}"
@@ -22,8 +23,8 @@ def download_instagram_video(url):
 @dp.message(CommandStart())
 async def start(message: Message):
     await message.answer("👋 Salom! Menga Instagram video linkini yuboring.\n\n"
-                         "🟢 Public postlarni video sifatida yuboraman.\n"
-                         "🔴 Private bo‘lsa, linkni kkinstagram.com ga o‘zgartirib qaytaraman.")
+                         "🟢 Public video yuklab beraman.\n"
+                         "🔴 Private bo‘lsa, linkni kk.instagram.com ga o‘zgartirib qaytaraman.")
 
 @dp.message()
 async def handle_message(message: Message):
@@ -34,9 +35,9 @@ async def handle_message(message: Message):
         await message.answer("⚠️ Iltimos, Instagram post linkini yuboring.")
         return
 
-    # Agar private akkaunt bo‘lsa — www → kkinstagram almashtiramiz
+    # Private akkaunt bo‘lsa — www → kk almashtirish
     if "www.instagram.com" in text:
-        new_link = text.replace("www.instagram.com", "kkinstagram.com")
+        new_link = text.replace("www.instagram.com", "kk.instagram.com")
         await message.answer(
             f"🔒 Bu xususiy hisobdagi post bo‘lishi mumkin.\n"
             f"📎 Linkni o‘zgartirdim:\n{new_link}"
@@ -53,5 +54,4 @@ async def handle_message(message: Message):
         await message.answer("❌ Video yuklab bo‘lmadi. Linkni tekshirib qayta yuboring.")
 
 if __name__ == "__main__":
-    import asyncio
     asyncio.run(dp.start_polling(bot))
