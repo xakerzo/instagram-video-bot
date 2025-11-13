@@ -1,3 +1,5 @@
 aiogram==2.25
-requests
 pydantic<2
+aiogram==2.2ls
+aiohttp<3.9
+requests
