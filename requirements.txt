@@ -2,3 +2,4 @@ aiogram==2.25
 requests
 pydantic<2
 aiohttp<3.9
+pip install -r
