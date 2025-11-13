@@ -1,4 +1,4 @@
-aiogram==3.1.4
+aiogram==2.25
 requests
 pydantic<2
-aiohttp
+aiohttp<3.9
